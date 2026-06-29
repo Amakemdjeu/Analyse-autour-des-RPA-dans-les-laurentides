@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RPA Laurentides Évaluation de l'environnement</title>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"> <!-- styles de la carte -->
+  <link rel="stylesheet" href="style.css">                                   <!-- nos propres styles -->
+</head>
+
+<body>
+
+  <main class="app">
+    <aside id="info" class="sidebar"></aside>  <!-- panneau gauche, rempli par script.js -->
+    <section class="map-section">
+      <div id="map"></div>                     <!-- la carte Leaflet s'affiche ici -->
+    </section>
+  </main>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>       <!-- carte interactive -->
+  <script src="https://unpkg.com/@turf/turf/turf.min.js"></script>        <!-- calculs géographiques -->
+  <script src="script.js"></script>                                        <!-- notre code -->
+
+</body>
+</html>

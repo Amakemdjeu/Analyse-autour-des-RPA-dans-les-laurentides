@@ -1,0 +1,291 @@
+/* ================================================
+   style.css — Apparence de l'application
+   ================================================ */
+
+
+/* --- Couleurs et valeurs réutilisables ---
+   Changer une valeur ici la change partout       */
+:root {
+  --vert:         #2e7d32;
+  --jaune:        #f9a825;
+  --rouge:        #c62828;
+  --gris:         #616161;
+
+  --fond-vert:    #e8f5e9;
+  --fond-jaune:   #fff8e1;
+  --fond-rouge:   #ffebee;
+  --fond-gris:    #f5f5f5;
+
+  --texte:        #263238;
+  --bordure:      #dddddd;
+  --titre-vert:   #1b5e20;
+
+  --largeur-panneau: 390px;
+  --police:          Arial, sans-serif;
+}
+
+
+/* --- Mise en page générale ---
+   Deux colonnes : panneau à gauche, carte à droite */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--police);
+  color: var(--texte);
+  background: #f5f5f5;
+}
+
+.app {
+  display: flex;      /* place les enfants côte à côte */
+  width: 100vw;
+  height: 100vh;
+}
+
+.sidebar {
+  width: var(--largeur-panneau);
+  padding: 10px;
+  overflow-y: auto;   /* défilement si le contenu est long */
+  background: white;
+  border-right: 1px solid var(--bordure);
+}
+
+.map-section { flex: 1; }        /* prend tout l'espace restant */
+#map { width: 100%; height: 100%; }
+
+
+/* --- En-tête ---
+   Bloc vert foncé toujours visible en haut du panneau */
+.entete {
+  background: linear-gradient(135deg, #243b1f, #2f4f2f);
+  color: white;
+  padding: 14px;
+  border-radius: 9px;
+  margin-bottom: 14px;
+}
+
+.entete-sous-titre {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #c5d8b8;
+  margin-bottom: 6px;
+}
+
+.entete-titre {
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 1.25;
+  margin-bottom: 8px;
+}
+
+.entete-texte {
+  font-size: 13px;
+  line-height: 1.4;
+  margin-bottom: 10px;
+}
+
+.entete-badge {
+  display: inline-block;
+  padding: 5px 10px;
+  font-size: 12px;
+  border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 20px;
+  background: rgba(255,255,255,0.08);
+}
+
+/* Boîte d'instruction à l'accueil */
+.boite-instruction {
+  margin-bottom: 14px;
+  line-height: 1.45;
+  font-size: 14px;
+}
+
+
+/* --- Légende ---
+   Blocs affichés à l'accueil                    */
+.separateur {
+  border: none;
+  border-top: 1px solid var(--bordure);
+  margin: 14px 0;
+}
+
+.bloc-legende { margin-top: 14px; }
+
+.bloc-legende-titre {
+  font-weight: bold;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.ligne-legende {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 7px;
+  font-size: 13px;
+}
+
+/* Icônes de légende */
+.icone-carre {
+  width: 16px; height: 12px;
+  border-radius: 3px;
+  border: 1px solid #999;
+  flex-shrink: 0;
+}
+
+.icone-cercle {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.icone-trait {
+  width: 18px; height: 4px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+
+/* --- Fiche résidence ---
+   Nom, adresse, municipalité, code postal        */
+.residence-titre {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: var(--titre-vert);
+}
+
+.info-ligne {
+  margin-bottom: 6px;
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+.info-etiquette { font-weight: bold; }
+
+.section-titre {
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+
+/* --- Score ---
+   Carte colorée avec la note sur 8
+   La classe (favorable / moyen / faible) est ajoutée par script.js */
+.score-carte {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  background: var(--fond-gris);
+  border-left: 6px solid var(--gris);
+}
+
+.score-note {
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.score-texte {
+  margin-top: 4px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* Couleurs selon la classification */
+.score-carte.favorable { background: var(--fond-vert);   border-left-color: var(--vert); }
+.score-carte.moyen     { background: var(--fond-jaune);  border-left-color: var(--jaune); }
+.score-carte.faible    { background: var(--fond-rouge);  border-left-color: var(--rouge); }
+
+.score-carte.favorable .score-note,
+.score-carte.favorable .score-texte { color: var(--vert); }
+
+.score-carte.moyen .score-note,
+.score-carte.moyen .score-texte     { color: var(--jaune); }
+
+.score-carte.faible .score-note,
+.score-carte.faible .score-texte    { color: var(--rouge); }
+
+
+/* --- Tableau des équipements ---
+   Une ligne par catégorie : nom à gauche, valeur à droite */
+.equipements { margin-top: 10px; }
+
+.equipement-ligne {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 5px 0;
+  border-bottom: 1px solid var(--bordure);
+  font-size: 14px;
+}
+
+.equipement-nom   { font-weight: 500; }
+.equipement-valeur { font-weight: bold; text-align: right; }
+
+
+/* --- IDMS (indice de défavorisation) ---
+   Même structure visuelle que le score
+   Classes : idms-faible (C1), idms-moyen (C2), idms-forte (C3-C5), idms-neutre */
+.idms-carte {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  background: var(--fond-gris);
+  border-left: 6px solid var(--gris);
+}
+
+.idms-titre  { font-size: 14px; font-weight: bold; margin-bottom: 6px; }
+.idms-code   { font-size: 26px; font-weight: bold; }
+.idms-texte  { margin-top: 4px; font-size: 14px; font-weight: bold; }
+
+.idms-faible { background: var(--fond-vert);   border-left-color: var(--vert); }
+.idms-moyen  { background: var(--fond-jaune);  border-left-color: var(--jaune); }
+.idms-forte  { background: var(--fond-rouge);  border-left-color: var(--rouge); }
+.idms-neutre { background: var(--fond-gris);   border-left-color: var(--gris); }
+
+.idms-faible .idms-code, .idms-faible .idms-texte { color: var(--vert); }
+.idms-moyen  .idms-code, .idms-moyen  .idms-texte { color: var(--jaune); }
+.idms-forte  .idms-code, .idms-forte  .idms-texte { color: var(--rouge); }
+.idms-neutre .idms-code, .idms-neutre .idms-texte { color: var(--gris); }
+
+
+/* --- Interprétation finale ---
+   Bloc de texte coloré selon le score            */
+.interpretation {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  line-height: 1.45;
+  font-size: 14px;
+  border-left: 6px solid var(--gris);
+}
+
+.interpretation-titre {
+  font-weight: bold;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+
+.interpretation.favorable { background: var(--fond-vert);   border-left-color: var(--vert); }
+.interpretation.moyen     { background: var(--fond-jaune);  border-left-color: var(--jaune); }
+.interpretation.faible    { background: var(--fond-rouge);  border-left-color: var(--rouge); }
+
+
+/* --- Mobile (écrans < 800px) ---
+   Panneau au-dessus, carte en dessous            */
+@media (max-width: 800px) {
+  .app { flex-direction: column; }
+
+  .sidebar {
+    width: 100%;
+    max-height: 45vh;
+    border-right: none;
+    border-bottom: 1px solid var(--bordure);
+  }
+
+  .map-section { height: 55vh; }
+}
